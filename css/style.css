@@ -1,0 +1,75 @@
+/* reset */
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6,pre, form, fieldset, input, textarea, p, blockquote, th, td {padding: 0; margin: 0;}    
+fieldset, img { border: 0; }    
+table {border-collapse: collapse;  border-spacing: 0;}    
+ol, ul {list-style: none; }    
+address, caption, cite, code, dfn, em, strong, th, var { font-weight: normal; font-style: normal;}    
+caption, th {text-align: left;}    
+h1, h2, h3, h4, h5, h6 {font-weight: normal;font-size: 100%;}    
+q:before, q:after {content: '';}    
+abbr, acronym {border: 0;}
+
+.topbar {
+    width: 100%;
+    height: 80px;
+    background-color: honeydew;
+}
+
+.banner {
+    width: 100%;
+    height: 525px;
+    background-image: url("img/patrick-tomasso-70305-1.jpg");
+    background-color: firebrick;
+}
+
+.content {
+    width: 100%;
+    height: 480px;
+    background-color: #eeeeee;
+}
+
+.presentation {
+    width: 100%;
+    height: 520px;
+    background-color: #ffffff;
+}
+
+.footer {
+    width: 100%;
+    height: 395px;
+    background-color: black;
+}
+
+.logo {
+    position: absolute;
+    margin-left: 110px;
+    margin-top: 15px;   
+}
+
+.menu-link {
+    display: inline-block;
+    list-style:none;
+    float: right;
+    margin-right: 110px;
+}
+.menu-link li {
+    margin-top: 50px;
+    margin-left: 28px;
+    float: left;
+    bottom: 5px;
+}
+
+.menu-link li a {
+    font-size: 14px;
+    text-decoration: none;
+}
+.github-icon {
+
+    /* 因为在同一个容器里有另外一个元素进行了float: left;
+    所以此处用了position: absolute来进行绝对定位
+    否则会和浮动元素造成冲突 */
+    
+    position: absolute;
+    right: 10px;
+    top: 46px;
+}
