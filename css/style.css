@@ -18,7 +18,7 @@ abbr, acronym {border: 0;}
 .banner {
     width: 100%;
     height: 525px;
-    background-image: url("img/patrick-tomasso-70305-1.jpg");
+    background-image: url("../img/patrick-tomasso-70305-1.jpg");
     background-color: firebrick;
 }
 
@@ -72,4 +72,89 @@ abbr, acronym {border: 0;}
     position: absolute;
     right: 10px;
     top: 46px;
+}
+
+.text-1 {
+    position: absolute;
+    width: 360px;
+    height: 120px;
+    right: 110px;
+    margin-top:405px;
+    
+    /* 设定背景图片透明度 */
+    background-image: linear-gradient(rgba(255,255,255,0.7)0%,rgba(255,255,255,0.5)50%,rgba(255,255,255,0)100%)
+}
+.text-1 h1 {
+    font-size: 14px;
+    float: right;
+    margin: 10px 10px 12px 10px;
+}
+
+.text-1-2 {
+    font-size: 12px;
+    margin: 0 10px 30px 10px;
+    line-height: 150%;
+    text-align: right;
+
+    /* 清除浮动 */
+    clear: right;
+}
+
+.box-big {
+    width: 980px;
+    height: inherit;
+    margin: 0 auto;
+    
+}
+
+.box1 {
+    background-color: white;
+    width: 320px;
+    min-height: 360px;
+    float: left;
+    margin-top: 10px;
+}
+
+/* 选择父元素的第二个元素 */
+.box1:nth-child(2) {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.box1 img {
+    margin: 10px 10px 15px 10px;
+    background-image: url("../img/patrick-tomasso-70305-1.jpg")
+
+}
+.text-2 {
+    font-size: 12px;
+    line-height: 170%;
+    margin: 5px 30px 25px 30px;
+}
+
+.img-wrap {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background-image: url("../img/p642927408-01.jpg");
+    border: 0;
+
+    /* 先利用absolute + left: 50% + transform: translate(-50%,0)居中
+    然后再利用translate(0,-50px)使元素垂直上升移动50px */
+    left: 50%;
+    transform: translate(-50%,0) translate(0,-50px);   
+}
+
+.text-3 {
+    color: black;
+    font: 20px "Century Gothic";
+    text-align: center;
+    padding-top: 160px;
+}
+.text-3-1 {
+    width: 600px;
+    font-size: 14px;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 48px;
 }
