@@ -36,7 +36,7 @@ abbr, acronym {border: 0;}
 
 .footer {
     width: 100%;
-    height: 395px;
+    min-height: 395px;
     background-color: black;
 }
 
@@ -157,4 +157,75 @@ abbr, acronym {border: 0;}
     text-align: center;
     margin: 0 auto;
     padding-top: 48px;
+}
+
+.menu-link-2 {
+    position: absolute;
+    list-style:none;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+.menu-link-2 li {
+    margin: 12px 12.5px;
+    float: left;
+}
+
+.menu-link-2 li a {
+    color: white;
+    font-size: 11px;
+    text-decoration: none;
+}
+hr {
+    width: 100%;
+    position: absolute;
+    margin-top: 43px;
+}
+
+.link-box {
+    color: #999999;
+    width: 980px;
+    position: absolute;
+    list-style:none;
+    left: 50%;
+    transform: translate(-50%,0);
+    margin-top: 78px;
+}
+
+.link-box a {
+    color: white;
+
+    /* 设置链接的样式 */
+    text-decoration: none;
+}
+
+.link-ul{
+    display: flex
+}
+
+.link-ul  li {
+    font-size: 11px;
+    float: left;
+}
+
+.link-ul-li {
+    flex: 1;
+}
+
+.link-ul-li-ul  li{
+    margin-bottom:12px;    
+    float: none;
+}
+.link-ul-li-ul li:first-child {
+    margin-bottom: 30px;
+}
+.link-ul-li-ul  li a {
+    font-size: 3px;
+}
+.logo-2 {
+    /* 利用left + transform 使元素居中
+    设置position + bottom使元素总处于浏览器最下方 */
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%,0);
+    bottom:0;  
 }
