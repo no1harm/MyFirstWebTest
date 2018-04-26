@@ -239,6 +239,7 @@ blog样式
 
 */
 .blog-section {
+    /* position: relative; */
     display: flex;
     width: 980px;
     margin: 0 auto;
@@ -318,6 +319,8 @@ blog样式
     /* 解决position: relative流下来的空白，增加下个元素的负边距 */
     margin-top: -80px;
 }
+
+/* 搜索框 */
 .search-input{
     background-color: white;
     width: 260px;
@@ -388,9 +391,11 @@ blog样式
     color: transparent;   
 }  
 
+/* 分类列表 */
 .classify {
     width: inherit;
-    height: 200px;;
+    height: 200px;
+    margin-bottom: 10px;
 
 }
 .classify li {
@@ -414,6 +419,99 @@ blog样式
 .classify li:hover {
     border-left: 4px solid #522a5c;
 }
-.active {
+ul.classify li.active {
     border-left: 4px solid #522a5c;
+}
+
+/* 日历 */
+.calendar {
+    width: inherit;
+    height: 240px;
+    background-color: white;
+}
+.month {
+    padding: 24px 24px 20px 20px;
+    color: #773c88;
+}
+.prev {
+    float: left;
+}
+.month span {
+    font-weight: 600;
+}
+.next {
+    float: right;
+}
+.calendar-table {
+    width: 220px;
+    height: 160px;
+    color: #999999;
+    margin: 0 auto;
+    position: relative;
+    transform: translateY(-15px);
+}
+.calendar-table td {
+    /* 设置table内文字的边距及居中方式 */
+    padding:6px;  
+    /* margin: 6px; */
+    font-size: 5px; 
+    text-align:center; 
+}
+.calendar-table th {
+    text-align:center;
+    padding: 0 6px 6px 6px;
+}
+.calendar-table tr {
+    /* 设置行的border */
+    border-bottom: 1px solid #eeeeee;
+}
+
+/* 标签云 */
+.tag-cloud {
+    width: inherit;
+    background-color: white;
+    margin-top: 10px;
+}
+.tag-cloud h6 {
+    color: #666666;
+    font-weight: 300;
+    padding: 13px 0 13px 16px;
+}
+.tag-cloud-p {
+    padding: 10px 20px 33px 16px;
+}
+
+/* 分页列表 */
+.pagination {
+
+    /* 如何让横向列表居中
+    把ul设置为display:inline
+    然后用text-align:center来使ul居中
+    没设置之前列表是display:block */
+    text-align: center;
+    
+    margin-bottom: 200px;
+}
+.pagination ul{
+    display: inline-block;
+}
+.pagination ul li {
+    /* 设置列表项为inline，列表可以横向排列 */
+    display: inline;
+}
+.pagination ul li a {
+    float: left;
+    text-decoration: none;
+    border: none;
+    padding: 14px 17px;   
+    margin: 0 5px;
+    background-color: white;
+}
+ul.pagination-ul li a:hover:not(.active) {
+    background-color: #a660b7;
+    color: white;    
+    }
+ul.pagination-ul li a.active {
+    background-color: #a660b7;
+    color: white;
 }
