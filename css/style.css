@@ -370,13 +370,6 @@ blog样式
     transform: translateY(-50%);
 }
 
-#input-txt {
-    /* input框内图片尺寸要和框高一样，不然不好定位 */
-    /* background-image: url("../img/search-01-01-01.png");
-    background-repeat:no-repeat;   */
-    /* padding-left: 40px; */
-}
-
 /* 改变input placeholder的字体颜色 */
 .search-input ::-webkit-input-placeholder { /* WebKit, Blink, Edge */    color:  #999999; }
 .search-input :-moz-placeholder { /* Mozilla Firefox 4 to 18 */   color:    #999999; }
@@ -514,4 +507,30 @@ ul.pagination-ul li a:hover:not(.active) {
 ul.pagination-ul li a.active {
     background-color: #a660b7;
     color: white;
+}
+
+/* tab菜单栏 */
+.tab-menu {
+    margin-top: 13px;
+    display: inline-block;
+}
+.tab-menu li {
+    float: left;
+}
+.tab-menu li a{
+    text-decoration: none;
+    padding: 15px 20px 20px 20px;
+    background-color: #ffffff;
+    border-top: 4px solid #773c88;
+    border-right: 1px solid #eeeeee;
+    border-bottom: 1px solid #eeeeee;
+}
+.tab-menu li a:haver{
+    background-color: #a660b7;
+}
+.tab-menu li a{
+    font-size: 8px;
+}
+.tab-menu li:first-child {
+    border-bottom: 1px solid white;
 }
