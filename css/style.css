@@ -512,6 +512,7 @@ ul.pagination-ul li a.active {
 /* tab菜单栏 */
 .tab-menu {
     margin-top: 13px;
+    margin-bottom: 16px;
     display: inline-block;
 }
 .tab-menu li {
@@ -534,3 +535,108 @@ ul.pagination-ul li a.active {
 .tab-menu li:first-child {
     border-bottom: 1px solid white;
 }
+
+/* 瀑布流布局 */
+.big-tab-backgound{
+    width: inherit;
+    background-color: white;
+}
+.big-table {
+    width: 670px;
+    margin: 0 auto;
+    padding-top: 20px;
+    background-color: white;
+}
+
+/* 左侧列表 */
+.big-table-1 {
+    width: 330px;
+    float: left;
+}
+.column-independent {
+    width: inherit;
+    height: 220px;
+    background-color: indigo;
+    margin-bottom: 10px;
+}
+
+/* 右侧列表两列 */
+.big-table-2 {
+    /* position: relative; */
+    width: 330px;
+    float: right;
+    display: flex; 
+    /* row（默认值）：主轴为水平方向，起点在左端 */
+    flex-direction: row;
+    /* 这里有点小问题，不能设置两列之间的间隔宽度 */
+    justify-content:space-between;
+    column-gap: 10px;
+    
+}
+.column { 
+    display: flex; 
+    flex-direction: column; 
+    width: calc(100%/2);
+}
+
+.item {
+    box-sizing: border-box;
+    padding-bottom: 10px;
+    counter-increment: item-counter;
+  }
+.item__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 160px;
+    height: 185px;
+    font-size: 40px;
+    color: #070319;
+    background: currentColor;
+    box-sizing: border-box;
+    color: #18314F;
+  }
+.item__content__small {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 160px;
+    height: 185px;
+    font-size: 40px;
+    color: #070319;
+    background: currentColor;
+    box-sizing: border-box;
+    color: #18314F;
+  }
+  .item__content__medium {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 160px;
+    height: 205px;
+    font-size: 40px;
+    color: #070319;
+    background: currentColor;
+    box-sizing: border-box;
+    color: #18314F;
+  }
+  .item__content__big {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 160px;
+    height: 255px;
+    font-size: 40px;
+    color: #070319;
+    background: currentColor;
+    box-sizing: border-box;
+    color: #18314F;
+  }
