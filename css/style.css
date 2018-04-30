@@ -526,7 +526,7 @@ ul.pagination-ul li a.active {
     border-right: 1px solid #eeeeee;
     border-bottom: 1px solid #eeeeee;
 }
-.tab-menu li a:haver{
+.tab-menu li:haver{
     background-color: #a660b7;
 }
 .tab-menu li a{
@@ -545,6 +545,7 @@ ul.pagination-ul li a.active {
     width: 670px;
     margin: 0 auto;
     padding-top: 20px;
+    padding-bottom: 20px;
     background-color: white;
 }
 
@@ -640,3 +641,58 @@ ul.pagination-ul li a.active {
     box-sizing: border-box;
     color: #18314F;
   }
+  .clearDiv {
+    clear: both; 
+  }
+
+.turn-to-more {
+      height: 50px;
+      width: inherit;
+      background-color: white;
+      margin-top: 10px;
+      text-align: center;
+}
+ 
+.turn-to-more a {
+    text-decoration: none;
+    color: #666666;
+    line-height: 50px;
+}
+  
+.turn-to-more:hover {
+    background-color: #999999;
+}
+
+/*  */
+/* about.html */
+/*  */
+.about-section {
+    width: 980px;
+    /* height: 200px; */
+    margin: 0 auto;
+    margin-top: 100px;
+    margin-bottom: 24px;
+}
+.about-section-bg1 {
+    float: left;
+    width: 486px;
+    height: 200px;
+    background-color: white;
+}
+.about-section-bg2 {
+    float: right;
+    width: 486px;
+    height: 200px;
+    background-color: white;
+}
+.user-img {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background-image: url("../img/p642927408-01.jpg");
+    border: 10px solid #eeeeee;
+    margin:  0 auto;
+    top:-60px;
+
+}
