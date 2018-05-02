@@ -33,6 +33,7 @@
     * - [X] 了解Grid、Flexbox等布局方式
     * - [X] 完成task0001_index.html
     * - [X] 完成task0001_blog.html
-    * - [ ] 完成task0001_gallery.html
-    * - [ ] 完成task0001_about.html
+    * - [X] 完成task0001_gallery.html
+    * - [X] 完成task0001_about.html
     
+* **JavaScript**
