@@ -4,7 +4,7 @@
 <hr>
 ### **学习进度**
 
-* **HTML + CSS**
+ * **HTML + CSS**
 
     * - [X] 了解什么是Web
     * - [X] 了解什么是HTML
@@ -36,4 +36,22 @@
     * - [X] 完成task0001_gallery.html
     * - [X] 完成task0001_about.html
     
-* **JavaScript**
+ * **JavaScript**
+    * - [X] 实践判断各种数据类型的方法
+            * typeof
+            * instanceof
+            * constructor
+            * prototype
+            * jquery.type()
+    * - [X] 了解各种对象的读取、遍历方式
+        * 了解for in 的用法   
+    * - [X] 了解浅克隆和深度克隆概念       
+    * - [ ] 使用递归来实现一个深度克隆，可以复制一个目标对象，返回一个完整拷贝
+    * - [X] 使用newObj = JSON.parse (JSON.stringify(obj))来实现一个深度克隆
+    * - [X] 对数组进行去重操作，只考虑数组中元素为数字或字符串，返回一个去重后的数组 / 使用newArr = Array.from(new Set(arr))
+        *  了解Set()和Array.from()的用法
+    * - [X] 实现一个简单的trim函数，用于去除一个字符串头部和尾部的空白字符 / 用trim()方法
+    * - [X] 利用正则表达式去除字符串头部尾部空白字符 / str.replace(/(^\s*)|(\s*)$/g,"");
+    
+    
+    
