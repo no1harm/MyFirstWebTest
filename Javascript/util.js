@@ -46,10 +46,6 @@ console.log(a);// "1"
 console.log(b);// "2"
 
 // 深度克隆：所有元素或属性均完全复制，与原对象完全脱离，也就是说所有对于新对象的修改都不会反映到原对象中。
-function isClass(o){
-    return Object.prototype.toString.call(o).slice(8,-1);
-}
-
 function cloneObject(src) {
     var result
     if (typeof src == "string" || typeof src == "number") {
@@ -102,4 +98,250 @@ function simpleTrim(str) {
 // 利用正则表达式去除字符串头部尾部空白字符
 function trim(str) {
     return str.replace(/(^\s*)|(\s*)$/g,"");
+}
+
+
+// 实现一个遍历数组的方法，针对数组中每一个元素执行fn函数，并将数组索引和元素作为参数传递
+// 其中fn函数可以接受两个参数：item和index
+function each(arr, fn) {
+    // js的函数并不在乎你参数的名字，要查参数名也没意义，它随时都可以变化。你只能从FUNCTION.length获取形参的个数。
+    // 判断传入的fn函数有多少个参数，如果只有一个，则针对数组中的每一个元素执行fn函数
+    if (fn.length == 1) {
+        for (let i = 0; i < arr.length; i++) {
+            fn(i)
+        }
+    }
+    // 如果fn函数有两个参数，则将数组索引和元素作为参数传递
+    else if (fn.length == 2) {
+        for (let i = 0; i < arr.length; i++) {
+            fn(i,arguments[0][i])
+        }
+    }
+}
+
+// 获取一个对象里面第一层元素的数量，返回一个整数
+function getObjectLength(obj) {
+    var n = 0;
+    for (key in obj) {
+        n++;
+    }
+    return n;
+}
+
+// 判断是否为邮箱地址
+// ^ 表示匹配开头
+// \w+  \w表示匹配一个英文字母或数字，+表示匹配前面的元素一次或者多次
+// @  表示匹配@符号
+// [a-z0-9]+  [a-z0-9]表示匹配字母a-z或0-9，+表示匹配前面的元素一次或者多次
+// \.  表示匹配一个.
+// [a-z]+ 表示匹配字母a-z之中任意一个，+表示匹配前面的元素一次或者多次
+// {1,3}  表示匹配前面小括号中的内容1次-3次
+// $ 表示匹配结尾
+function isEmail(emailStr) {
+    var emailReg = /^\w+@[a-z0-9]+(\.[a-z]+){1,3}$/;
+    if(emailReg.test(emailStr)) {
+        console.log("您输入的Email地址格式正确！")
+        return true;
+    } else {
+        console.log("您输入的Email地址格式不正确")
+        return false;
+    }
+}
+
+// 判断是否为手机号码
+// 1--以1为开头；
+// 2--第二位可为3,4,5,7,8,中的任意一位；
+// 3--最后以0-9的9个整数结尾。
+function isPhone(phoneInt) {
+    var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;  
+    if (myreg.test(phoneInt)) {
+        console.log("您输入的手机号码格式正确！")  
+        return true;  
+    } else {  
+        console.log("您输入的手机号码格式不正确！")          
+        return false;  
+    }  
+}
+
+
+
+// DOM
+
+// 为element增加一个样式名为newClassName的新样式
+// 另一种方法，element.classList.add('newClassName'),但是存在兼容性问题（不兼容IE10以下）
+function addClass(element, newClassName) {
+    if (!hasClass(element, newClassName)) {
+        element.className += " " + newClassName;
+        // element.className += " "
+        // element.className += newClassName
+    }
+}
+
+// 移除element中的样式oldClassName
+// 也可以这样子写
+// function removeClass(element, oldClassName) {
+//     if (hasClass(element,oldClassName)) {
+//         // 先获取element的所有classname
+//         var elementClassName = element.className;
+//         // 然后把oldclassname替换掉
+//         var newElementClassName = elementClassName.replace(oldClassName,"");
+//         element.className = newElementClassName;
+//         // 简写 element.className = element.className.replace(oldClassName,"")
+//     }
+// }
+function removeClass(element, oldClassName) {
+    if (hasClass(element,oldClassName)) {
+        var oldClassNameReg = new RegExp("(\\s|^)" + oldClassName + "(\\s|$)");
+        element.className = element.className.replace(oldClassNameReg,"");
+    }
+}
+
+// 判断siblingNode和element是否为同一个父元素下的同一级的元素，返回bool值
+// var a = document.getElementByIdx_x_x("dom");
+// var b = a.childNodes;   获取a的全部子节点
+// var c = a.parentNode;   获取a的父节点
+// var d = a.nextSbiling;   获取a的下一个兄弟节点
+// var e = a.previousSbiling;获取a的上一个兄弟节点
+// var f = a.firstChild;    获取a的第一个子节点
+// var g = a.lastChild;     获取a的最后一个子节点
+function isSiblingNode(element, siblingNode) {
+    return element.parentNode === siblingNode.parentNode
+}
+
+// 获取element相对于浏览器窗口的位置，返回一个对象{x, y}
+// max() 方法可返回两个指定的数中带有较大的值的那个数。
+function getPosition(element) {
+    var position = {};
+    position.x = element.getBoundingClientRect().left + Math.max(document.documentElement.scrollLeft, document.body.scrollLeft);//获取相对位置+滚动距离=绝对位置.
+    position.y = element.getBoundingClientRect().top + Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+    return position;
+}
+
+// 实现一个简单的Query
+function VQuery(selector, root) {
+    //用来保存选择的元素
+    var elements = [];              //保存结果节点数组
+    var allChildren = null;         //用来保存获取到的临时节点数组
+    root = root || document;        //若没有给root，赋值document
+    switch (selector.charAt(0)) {   //charAt() 方法可返回指定位置的字符。
+    case "#":                       //id选择器
+        elements.push(root.getElementById(selector.substring(1))); //push() 方法可向数组的末尾添加一个或多个元素，并返回新的长度。
+        break;
+    case ".":                       //class选择器
+        if (root.getElementsByClassName) { //标准
+            elements = root.getElementsByClassName(selector.substring(1));//substring() 方法用于提取字符串中介于两个指定下标之间的字符。
+        } else {                    //兼容低版本浏览器
+            var reg = new RegExp("\\b" + selector.substring(1) + "\\b");
+            allChildren = root.getElementsByTagName("*");
+            for (var i = 0, len = allChildren.length; i < len; i++) {
+                if (reg.test(allChildren[i].className)) {
+                    elements.push(allChildren[i]);
+                }
+            }
+        }
+        break;
+    case "[":                       //属性选择器
+                                    // indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。
+        if (selector.indexOf("=") === -1) {
+        //只有属性没有值的情况
+            allChildren = root.getElementsByTagName("*");
+            for (var i = 0, len = allChildren.length; i < len; i++) {
+                if (allChildren[i].getAttribute(selector.slice(1, -1)) !== null) {
+                    elements.push(allChildren[i]);
+                }
+            }
+        } else {
+        //既有属性又有值的情况
+            var index = selector.indexOf("="); //缓存=出现的索引位置。
+            allChildren = root.getElementsByTagName("*");
+            for (var i = 0, len = allChildren.length; i < len; i++) {
+                if (allChildren[i].getAttribute(selector.slice(1, index)) === selector.slice(index + 1, -1)) {
+                    elements.push(allChildren[i]);
+                }
+            }
+        }
+        break;
+    default:                        //tagName
+        elements = root.getElementsByTagName(selector);
+    }
+    return elements
+}
+/**
+ * 模仿jQuery的迷你$选择符。
+ * @param   {string} selector CSS方式的选择器，支持简单的后代选择器（只支持一级）
+ * @returns {object} 返回获取到的第一个节点对象，后代选择器时，返回第一个对象中的第一个符合条件的对象
+ */
+function $(selector) {
+//这里trim处理输入时两端出现空格的情况，支持ie9+。但是这个函数实现起来也特别简单，可以参考我task0002（-）前面有trim函数的实现。稍微修改一下，这样就没兼容性问题了。
+    if (selector == document) {
+        return document;
+    }
+    selector = selector.trim();
+    //存在空格时，使用后代选择器
+    // selector去除前后空格后，若是字符串里面还有空格
+    if (selector.indexOf(" ") !== -1) {
+        var selectorArr = selector.split(/\s+/); //分割成数组，第一项为parent，第二项为chlid。
+        //这里没去考虑特别多的情况了，只是简单的把参数传入。
+        return VQuery(selectorArr[1], VQuery(selectorArr[0])[0])[0];
+    } else { //普通情况,只返回获取到的第一个对象
+        return VQuery(selector,document)[0];
+    }
+}
+
+function vq(selector,root) {
+    var elementList = [];
+    var allChildren = null;
+    root = root || document;
+    switch (selector.charAt(0)) {
+    case "#":
+        elementList.push(root.getElementById(selector.substring(1)));
+        break;
+    case ".":
+        if (root.getElementsByClassName){ //如果浏览器支持
+            elementList.push(root.getElementsByClassName(selector.substring(1)));
+        }else {
+            var reg =new RegExp("\\b" + selector.substring(1) + "\\b");
+            allChildren = root.getElementsByClassName("*");
+            for (var i = 0, len = allChildren.length; i < len; i++ ) {
+                if (reg.test(allChildren[i].className)) {
+                    elementList.push(allChildren[i])
+                }
+            }
+        }
+        break;
+    case "[":
+        if (selector.indexOf("=") === -1) {
+            allChildren = root.getElementsByClassName("*");
+            for (var i = 0,len = allChildren.length; i < len; i++){
+                if (allChildren[i].getAttribute(selector.slice(1,-1))!== null) {
+                    elementList.push(allChildren[i]);
+                }
+            }            
+        } else {
+            var indexN = selector.indexOf("=");
+            allChildren =root.getElementsByTagName("*");
+            for (var i = 0, len = allChildren.length; i < len; i++){
+                if (allChildren[i].getAttribute(selector,selector.slice(1,indexN)) === selector.slice(indexN + 1,-1)){
+                    elementList.push(allChildren[i])
+                }
+            }
+        }
+        break;
+    default:                        //tagName
+    elements = root.getElementsByTagName(selector);
+    }
+    return elementList;
+}
+function $(selector) {
+    if (selector == document){
+        return document; 
+    }
+    selector = selector.trim()
+    if (selector.indexOf(" ") !== -1) {
+        var selectorArr = selector.split(/\s+/); 
+        return VQuery(selectorArr[1], VQuery(selectorArr[0])[0])[0];
+    } else { 
+        return VQuery(selector,document)[0];
+    }
+
 }
