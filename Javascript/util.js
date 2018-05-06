@@ -343,5 +343,113 @@ function $(selector) {
     } else { 
         return VQuery(selector,document)[0];
     }
-
 }
+
+
+// 事件
+
+// 给一个element绑定一个针对event事件的响应，响应函数为listener
+function addEvent(element, event, listener) {
+    element = element.trim()
+    switch(element.charAt(0)) {
+        case "#":
+            document.getElementById(element.substring(1)).addEventListener(event,listener,false);
+            break;
+        case ".":
+            var classAdd = document.getElementsByClassName(element.substring(1))
+            for(i = 0; i < classAdd.length; i++){
+                classAdd[i].addEventListener(event,listener,false);
+            }
+            break;
+        case "[":
+        if (element.indexOf("=") === -1) {
+            allChildren = document.getElementsByClassName("*");
+            for (var i = 0,len = allChildren.length; i < len; i++){
+                if (allChildren[i].getAttribute(element.slice(1,-1))!== null) {
+                   allChildren[i].addEventListener(event,listener,false) ;
+                }
+            }            
+        } else {
+            var indexN = element.indexOf("=");
+            allChildren =document.getElementsByTagName("*");
+            for (var i = 0, len = allChildren.length; i < len; i++){
+                if (allChildren[i].getAttribute(element,element.slice(1,indexN)) === element.slice(indexN + 1,-1)){
+                    allChildren[i].addEventListener(event,listener,false);
+                }
+            }
+        }
+        break;
+        default:                        //tagName
+            var allChildren = document.getElementsByTagName(element);
+            for (i = 0; i < allChildren.length; i++) {
+                allChildren[i].addEventListener(event,listener,false)
+            }
+    }
+ }
+  
+// 测试用例
+function myFunction() {
+    document.getElementById("demo").style.color = "red";
+}
+
+// 移除element对象对于event事件发生时执行listener的响应
+function removeEvent(element, event, listener) {
+    element = element.trim()
+    switch(element.charAt(0)) {
+        case "#":
+            document.getElementById(element.substring(1)).removeEventListenr(event,listener,false);
+            break;
+        case ".":
+            var classAdd = document.getElementsByClassName(element.substring(1))
+            for(i = 0; i < classAdd.length; i++){
+                classAdd[i].removeEventListenr(event,listener,false);
+            }
+            break;
+        case "[":
+        if (element.indexOf("=") === -1) {
+            allChildren = document.getElementsByClassName("*");
+            for (var i = 0,len = allChildren.length; i < len; i++){
+                if (allChildren[i].getAttribute(element.slice(1,-1))!== null) {
+                   allChildren[i].removeEventListenr(event,listener,false) ;
+                }
+            }            
+        } else {
+            var indexN = element.indexOf("=");
+            allChildren =document.getElementsByTagName("*");
+            for (var i = 0, len = allChildren.length; i < len; i++){
+                if (allChildren[i].getAttribute(element,element.slice(1,indexN)) === element.slice(indexN + 1,-1)){
+                    allChildren[i].removeEventListenr(event,listener,false);
+                }
+            }
+        }
+        break;
+        default:                        //tagName
+            var allChildren = document.getElementsByTagName(element);
+            for (i = 0; i < allChildren.length; i++) {
+                allChildren[i].removeEventListenr(event,listener,false)
+            }
+    }
+}
+
+// 实现对click事件的绑定
+function addClickEvent(element, listener) {
+    addEvent(element, "click", listener);
+}
+
+// 实现对于按Enter键时的事件绑定
+function addEnterEvent(element, listener) {
+    addEvent(element, "keydown", function (ev) {
+    //兼容性处理。
+    // 这一句这么写是要兼容各个浏览器，
+    // 在FireFox浏览器中，事件绑定的函数要获取到事件本身，需要从函数中传入，而IE等浏览器则可以直接使用event或者window.event得到事件本身。
+        var oEvent = ev || window.event;
+        if (oEvent.keyCode === 13) {
+            listener();
+        }
+    });
+}
+// Enter事件，这里主要考察的键盘的事件的触发。
+//  keydown事件：在键盘按下时触发.
+//  keyup事件：在按键释放时触发,也就是你按下键盘起来后的事件
+//  keypress事件：在敲击按键时触发,我们可以理解为按下并抬起同一个按键
+//  keyCode属性：在键盘事件触发时，按下的键的值。值=13时，为Enter键。（需进行兼容处理）
