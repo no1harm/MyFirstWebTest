@@ -453,3 +453,82 @@ function addEnterEvent(element, listener) {
 //  keyup事件：在按键释放时触发,也就是你按下键盘起来后的事件
 //  keypress事件：在敲击按键时触发,我们可以理解为按下并抬起同一个按键
 //  keyCode属性：在键盘事件触发时，按下的键的值。值=13时，为Enter键。（需进行兼容处理）
+
+// 把上面几个函数和$做一下结合，把他们变成$对象的一些方法
+$.on = function (element, type, listener) {
+    return addEvent(element, type, listener);
+};
+$.un = function (element, type, listener) {
+    return removeEvent(element, type, listener);
+};
+$.click = function (element, listener) {
+    return addClickEvent(element, listener);
+}
+$.enter = function (element, listener) {
+    return addEnterEvent(element, listener);
+};
+
+function delegateEvent(element, tag, eventName, listener) {
+    return addEvent(element, eventName, function (ev) {
+        var oEvent = ev || event; //兼容处理
+        var target = oEvent.target || oEvent.srcElement; //兼容处理
+        if (target.tagName.toLocaleLowerCase() === tag) {
+            listener.call(target, oEvent); //使用call方法修改执行函数中的this指向，现在this指向触发了事件的HTML节点（可直接使用this.innerHTML返回该节点内容）
+        }
+    })
+}
+$.delegate($("#list"), "li", "click", clickHandle);
+
+
+// BOM
+
+// 判断是否为IE浏览器，返回-1或者版本号
+function isIE() {
+    var uUserAgent = navigator.userAgent; //保存浏览器的userAgent
+    var ieAgent = uUserAgent.match(/msie (\d+.\d+)/i);
+    if (ieAgent) {
+        return ieAgent[1];
+    } else {
+        if (uUserAgent.match(/Trident\/7.0;/i)) { //处理到ie11.
+            ieAgent = uUserAgent.match(/rv:(\d+.\d+)/i);
+            return ieAgent[1];
+        }
+        return -1; //不是ie浏览器。
+    }
+}
+
+/**
+ * 设置cookie
+ * @param {String} cookieName  设置cookie名
+ * @param {String} cookieValue 对对应的cookie名
+ * @param {Number} expiredays  过期的时间(多少天后)
+ */
+function setCookie(cookieName, cookieValue, expiredays) {
+    var oDate = new Date();
+    oDate.setDate(oDate.getDate() + expiredays);
+    document.cookie = cookieName + "=" + cookieValue + ";expires=" + oDate;
+}
+
+ /**
+ * 获取cookie
+ * @param   {String} cookieName 待寻找的cookie名
+ * @returns {String} 返回寻找到的cookie值,无时为空
+ */
+function getCookie(cookieName) {
+    var arr = document.cookie.split("; ");
+    for (var i = 0; i < arr.length; i++) {
+        var arr2 = arr[i].split("=");
+        if (arr2[0] == cookieName) {
+            return arr2[1];
+        }
+    }
+    return "";
+}
+
+/**
+ * 删除cookie
+ * @param {String} cookieName 待删除的cookie名
+ */
+function removeCookie(cookieName) {
+    setCookie(cookieName, "1", -1)
+}
