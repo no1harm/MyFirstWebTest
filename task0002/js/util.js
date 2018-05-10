@@ -347,46 +347,55 @@ function $(selector) {
 
 
 // 事件
-
+// 这里的addEvent()函数到了最后做大作业的时候会出现bug(暂时不能解决)
 // 给一个element绑定一个针对event事件的响应，响应函数为listener
+// function addEvent(element, event, listener) {
+//     element = element.trim();
+//     switch(element.charAt(0)) {
+//         case "#":
+//             document.getElementById(element.substring(1)).addEventListener(event,listener,false);
+//             break;
+//         case ".":
+//             var classAdd = document.getElementsByClassName(element.substring(1))
+//             for(i = 0; i < classAdd.length; i++){
+//                 classAdd[i].addEventListener(event,listener,false);
+//             }
+//             break;
+//         case "[":
+//         if (element.indexOf("=") === -1) {
+//             allChildren = document.getElementsByClassName("*");
+//             for (var i = 0,len = allChildren.length; i < len; i++){
+//                 if (allChildren[i].getAttribute(element.slice(1,-1))!== null) {
+//                    allChildren[i].addEventListener(event,listener,false) ;
+//                 }
+//             }            
+//         } else {
+//             var indexN = element.indexOf("=");
+//             allChildren =document.getElementsByTagName("*");
+//             for (var i = 0, len = allChildren.length; i < len; i++){
+//                 if (allChildren[i].getAttribute(element,element.slice(1,indexN)) === element.slice(indexN + 1,-1)){
+//                     allChildren[i].addEventListener(event,listener,false);
+//                 }
+//             }
+//         }
+//         break;
+//         default:                        //tagName
+//             var allChildren = document.getElementsByTagName(element);
+//             for (i = 0; i < allChildren.length; i++) {
+//                 allChildren[i].addEventListener(event,listener,false)
+//             }
+//     }
+//  }
+
 function addEvent(element, event, listener) {
-    element = element.trim()
-    switch(element.charAt(0)) {
-        case "#":
-            document.getElementById(element.substring(1)).addEventListener(event,listener,false);
-            break;
-        case ".":
-            var classAdd = document.getElementsByClassName(element.substring(1))
-            for(i = 0; i < classAdd.length; i++){
-                classAdd[i].addEventListener(event,listener,false);
-            }
-            break;
-        case "[":
-        if (element.indexOf("=") === -1) {
-            allChildren = document.getElementsByClassName("*");
-            for (var i = 0,len = allChildren.length; i < len; i++){
-                if (allChildren[i].getAttribute(element.slice(1,-1))!== null) {
-                   allChildren[i].addEventListener(event,listener,false) ;
-                }
-            }            
-        } else {
-            var indexN = element.indexOf("=");
-            allChildren =document.getElementsByTagName("*");
-            for (var i = 0, len = allChildren.length; i < len; i++){
-                if (allChildren[i].getAttribute(element,element.slice(1,indexN)) === element.slice(indexN + 1,-1)){
-                    allChildren[i].addEventListener(event,listener,false);
-                }
-            }
-        }
-        break;
-        default:                        //tagName
-            var allChildren = document.getElementsByTagName(element);
-            for (i = 0; i < allChildren.length; i++) {
-                allChildren[i].addEventListener(event,listener,false)
-            }
+    if (element.addEventListener) { //标准
+        element.addEventListener(event, listener, false);
+    } else if (element.attachEvent) { //低版本ie
+        element.attachEvent("on" + event, listener);
+    } else { //都不行的情况
+        element["on" + event] = listener;
     }
- }
-  
+}
 // 测试用例
 function myFunction() {
     document.getElementById("demo").style.color = "red";
@@ -477,7 +486,22 @@ function delegateEvent(element, tag, eventName, listener) {
         }
     })
 }
-$.delegate($("#list"), "li", "click", clickHandle);
+$.on = function(selector, event, listener) {
+    return addEvent($(selector),event,listener);
+}
+
+$.click = function(selector, listener) {
+    return addClickEvent($(selector),listener);
+}
+
+$.un = function(selector, event, listener) {
+    return removeEvent($(selector),event,listener);
+}
+
+$.delegate = function(selector,tag,event,listener) {
+    return delegateEvent($(selector),tag,event,listener);
+}
+// $.delegate($("#list"), "li", "click", clickHandle);
 
 
 // BOM
