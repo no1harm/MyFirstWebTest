@@ -387,6 +387,7 @@ function $(selector) {
 //     }
 //  }
 
+// 给一个element绑定一个针对event事件的响应，响应函数为listener
 function addEvent(element, event, listener) {
     if (element.addEventListener) { //标准
         element.addEventListener(event, listener, false);
