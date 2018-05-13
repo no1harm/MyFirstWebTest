@@ -386,7 +386,7 @@ function addEvent(element, event, listener) {
             }
     }
  }
-  
+
 // 测试用例
 function myFunction() {
     document.getElementById("demo").style.color = "red";
@@ -477,7 +477,25 @@ function delegateEvent(element, tag, eventName, listener) {
         }
     })
 }
-$.delegate($("#list"), "li", "click", clickHandle);
+
+// $.delegate($("#list"), "li", "click", clickHandle);
+$.on = function(selector, event, listener) {
+    return addEvent($(selector),event,listener);
+}
+
+$.click = function(selector, listener) {
+    return addClickEvent($(selector),listener);
+}
+
+$.un = function(selector, event, listener) {
+    return removeEvent($(selector),event.listener);
+}
+
+$.delegate = function (selector, tag, event, listener) {
+    //这里的`$(selector)`，是用的自己封装的选择器函数，愿意的话可以换成标准支持的`document.querySelector()`
+        return delegateEvent($(selector), tag, event, listener);
+    };
+    // 
 
 
 // BOM
