@@ -34,9 +34,21 @@
     * - [X] 掌握基本的布局方式
     * - [X] 了解Grid、Flexbox等布局方式
     * - [X] 完成task0001_index.html
+
+    ![index](./img/ScreenShot/主页.png)
+
     * - [X] 完成task0001_blog.html
+
+    ![blog](./img/ScreenShot/列表.png)
+
     * - [X] 完成task0001_gallery.html
+
+    ![layout](./img/ScreenShot/布局.png)
+
     * - [X] 完成task0001_about.html
+
+    ![personnel](./img/ScreenShot/个人.png)
+
     
  * **JavaScript**
     * - [X] 实践判断各种数据类型的方法
